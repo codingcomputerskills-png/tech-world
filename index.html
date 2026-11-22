@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECH WORLD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#071426;color:white;min-height:100vh}
+header{background:#0c1d33;padding:25px;text-align:center;border-bottom:2px solid #168bce}
+header h1{color:#38bdf8;letter-spacing:3px}header p{margin-top:10px;color:#b5c8da}
+.container{max-width:1100px;margin:45px auto;padding:20px;text-align:center}
+.intro{margin-top:15px;color:#b5c8da}
+.main-buttons{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin:40px 0}
+.main-btn{width:300px;padding:35px 20px;background:#102d4c;color:white;border:2px solid #168bce;border-radius:15px;font-size:22px;cursor:pointer;transition:.3s}
+.main-btn:hover{background:#168bce;transform:translateY(-6px);box-shadow:0 0 20px #168bce}
+.submenu{display:none;margin-top:30px;animation:appear .4s}.submenu h2{color:#38bdf8;margin-bottom:25px}
+.sub-btn{padding:15px 22px;margin:8px;background:#102d4c;color:white;border:1px solid #38bdf8;border-radius:8px;cursor:pointer;font-size:16px;transition:.3s}.sub-btn:hover{background:#168bce}
+.content{display:none;margin:35px auto;padding:30px;max-width:800px;background:#102d4c;border-radius:12px;border-left:4px solid #38bdf8;text-align:left;line-height:1.9;animation:appear .4s}
+.content h2{color:#38bdf8;margin-bottom:20px}.content h3{color:#7dd3fc;margin-top:20px;margin-bottom:8px}.content p{color:#e1edf7;margin-bottom:10px}
+.back-btn{padding:12px 22px;margin-top:25px;background:#168bce;color:white;border:none;border-radius:8px;cursor:pointer;font-size:15px}.back-btn:hover{background:#38bdf8;color:#071426}
+footer{text-align:center;padding:25px;color:#8da9c4;margin-top:60px;border-top:1px solid #173b5b}
+.project-tools{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.project-tools button,.project-tools a{padding:10px 14px;background:#168bce;color:white;border:none;border-radius:7px;cursor:pointer;font-size:14px;text-decoration:none}.project-tools button:hover,.project-tools a:hover{background:#38bdf8;color:#071426}
+.project-panel{margin-top:20px;padding:18px;background:#0c1d33;border:1px solid #38bdf8;border-radius:10px}.project-panel h3{margin-top:0}
+.project-list{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.project-list button{padding:12px 18px;background:#102d4c;color:white;border:1px solid #38bdf8;border-radius:8px;cursor:pointer}.project-list button:hover{background:#168bce}.project-list .add-btn{background:#087e65;border-color:#34d399}
+.project-editor{margin-top:18px;padding:18px;background:#071426;border:1px solid #38bdf8;border-radius:10px}
+.project-editor input,.project-editor textarea{width:100%;padding:12px;margin:8px 0;background:#102d4c;color:white;border:1px solid #38bdf8;border-radius:7px;font-size:16px;font-family:Arial,sans-serif}.project-editor textarea{min-height:150px;resize:vertical;line-height:1.7}.project-editor label{display:block;margin-top:12px;color:#7dd3fc}
+.project-image{width:100%;max-width:850px;max-height:650px;object-fit:contain;display:block;margin:15px auto;border-radius:10px;background:#071426}.image-preview{display:flex;flex-direction:column;gap:12px;margin-top:15px}.image-card{background:#102d4c;border-radius:10px;padding:12px;margin:10px 0}.save-message{color:#7dd3fc;margin-top:10px;font-size:14px}
+@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.main-btn{width:100%}.sub-btn{width:90%}.content{padding:20px}.project-list button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>TECH WORLD</h1><p>Բացահայտիր տեխնոլոգիաների աշխարհը</p></header>
+<div class="container">
+<h1>Բարի գալուստ</h1><p class="intro">Ընտրիր քեզ հետաքրքրող ուղղությունը և բացահայտիր նոր գիտելիքներ։</p>
+<div class="main-buttons">
+<button class="main-btn" onclick="showMenu('cyber')">🛡️ Կիբերանվտանգություն</button>
+<button class="main-btn" onclick="showMenu('ai')">🤖 Արհեստական բանականություն</button>
+<button class="main-btn" onclick="showMenu('languages')">💻 Ծրագրավորման լեզուներ</button>
+</div>
+<div class="submenu" id="cyber"><h2>🛡️ Կիբերանվտանգություն</h2>
+<button class="sub-btn" onclick="showContent('virus')">Համակարգչային վիրուսներ</button><button class="sub-btn" onclick="showContent('hacker')">Հաքերներ</button><button class="sub-btn" onclick="showContent('attack')">Կիբերհարձակումներ</button><button class="sub-btn" onclick="showContent('protection')">Պաշտպանության կանոններ</button><button class="sub-btn" onclick="showContent('password')">Գաղտնաբառերի անվտանգություն</button></div>
+<div class="submenu" id="ai"><h2>🤖 Արհեստական բանականություն</h2>
+<button class="sub-btn" onclick="showContent('whatAI')">Ի՞նչ է ԱԲ-ն</button><button class="sub-btn" onclick="showContent('chatgpt')">ChatGPT</button><button class="sub-btn" onclick="showContent('tools')">ԱԲ գործիքներ</button><button class="sub-btn" onclick="showContent('uses')">ԱԲ-ի կիրառությունները</button><button class="sub-btn" onclick="showContent('future')">ԱԲ-ի ապագան</button><button class="sub-btn" onclick="showContent('partner')">🤝 ԱԲ-ն՝ գործընկեր, թե՞ մրցակից ✨</button></div>
+<div class="submenu" id="languages"><h2>💻 Ծրագրավորման լեզուներ</h2>
+<button class="sub-btn" onclick="showContent('cpp')">C++</button><button class="sub-btn" onclick="showContent('python')">Python</button><button class="sub-btn" onclick="showContent('javascript')">JavaScript</button><button class="sub-btn" onclick="showContent('java')">Java</button><button class="sub-btn" onclick="showContent('php')">PHP</button><button class="sub-btn" onclick="showContent('csharp')">C#</button><button class="sub-btn" onclick="showContent('ruby')">Ruby</button><button class="sub-btn" onclick="showContent('swift')">Swift</button></div>
+<div class="content" id="content"><h2 id="contentTitle"></h2><div id="contentText"></div><button class="back-btn" onclick="backToMenu()">← Վերադառնալ</button>></div>
+</div>
+<footer>© 2026 TECH WORLD | Բոլոր իրավունքները պաշտպանված են</footer>
+<script>
+const information={
+virus:{title:'Համակարգչային վիրուսներ',text:`<p>Համակարգչային վիրուսները վնասակար ծրագրեր են, որոնք կարող են ներթափանցել համակարգիչ և խանգարել դրա բնականոն աշխատանքին։</p><h3>Վիրուսների տեսակները</h3><p><b>1. Trojan (Տրոյական ծրագիր)</b> – ծրագիր, որը ներկայանում է որպես օգտակար, բայց կարող է վնասել համակարգիչը։</p><p><b>2. Worm (Որդ)</b> – վնասակար ծրագիր, որը կարող է ինքնուրույն տարածվել համակարգչային ցանցերով։</p><p><b>3. Ransomware</b> – ծրագիր, որը սահմանափակում է ֆայլերի հասանելիությունը և պահանջում գումար։</p><h3>Ինչպե՞ս պաշտպանվել</h3><p>Օգտագործել հակավիրուսային ծրագիր, չբացել անհայտ հղումներ և ներբեռնումներ, պարբերաբար թարմացնել համակարգիչը։</p><h3>Հետաքրքիր փաստ</h3><p>Առաջին համակարգչային վիրուսներից մեկը՝ Creeper-ը, ստեղծվել է 1971 թվականին։</p>`},
+hacker:{title:'Հաքերներ',text:`<p>Հաքերները մարդիկ են, որոնք ունեն համակարգչային համակարգերի և ցանցերի մասին խոր գիտելիքներ։ Նրանք ուսումնասիրում են համակարգերի աշխատանքը և դրանց անվտանգության թույլ կողմերը։</p><h3>Հաքերների տեսակները</h3><p><b>White Hat</b> – աշխատում են համակարգերի անվտանգությունը բարելավելու համար։</p><p><b>Black Hat</b> – օգտագործում են իրենց գիտելիքները ապօրինի նպատակներով։</p><p><b>Grey Hat</b> – գործում են այս երկու խմբերի միջև, երբեմն առանց թույլտվության ուսումնասիրելով համակարգերը։</p><h3>Ինչո՞վ են զբաղվում</h3><p>Ուսումնասիրում են ծրագրերը, հայտնաբերում անվտանգության խնդիրները և օգնում կազմակերպություններին պաշտպանել տվյալները։</p><h3>Հետաքրքիր փաստ</h3><p>Կիբերանվտանգության մասնագետները կարող են աշխատել բանկերում, պետական կառույցներում և տեխնոլոգիական ընկերություններում։</p>`},
+attack:{title:'Կիբերհարձակումներ',text:`<p>Կիբերհարձակումները թվային համակարգերի, կայքերի կամ տվյալների դեմ իրականացվող վնասակար գործողություններ են։ Դրանց նպատակ կարող է լինել տեղեկատվության գողությունը կամ համակարգի աշխատանքի խափանումը։</p><h3>Հիմնական տեսակները</h3><p><b>Ֆիշինգ</b> – կեղծ հաղորդագրությունների միջոցով անձնական տվյալներ ստանալու փորձ։</p><p><b>DDoS հարձակում</b> – մեծ քանակությամբ հարցումներով կայքի աշխատանքը խափանելու փորձ։</p><p><b>Տվյալների գողություն</b> – անձնական կամ կազմակերպության տեղեկությունների ապօրինի ձեռքբերում։</p><h3>Ինչպե՞ս խուսափել</h3><p>Ստուգել կայքերի հասցեները, չվստահել կասկածելի նամակներին և երբեք չտրամադրել գաղտնաբառերը անծանոթներին։</p><h3>Հետաքրքիր փաստ</h3><p>Կիբերհարձակումները կարող են թիրախավորել ոչ միայն համակարգիչները, այլև հեռախոսները և խելացի սարքերը։</p>`},
+protection:{title:'Պաշտպանության կանոններ',text:`<p>Համացանցում անվտանգ լինելը կարևոր է յուրաքանչյուր մարդու համար։ Անձնական տվյալների պաշտպանությունը օգնում է խուսափել բազմաթիվ խնդիրներից։</p><h3>Անվտանգության 7 կանոն</h3><p>1. Մի բացիր անհայտ հղումներ։</p><p>2. Մի ներբեռնիր կասկածելի ֆայլեր։</p><p>3. Օգտագործիր հակավիրուսային ծրագիր։</p><p>4. Թարմացրու համակարգչի ծրագրերը։</p><p>5. Մի հրապարակիր անձնական տվյալներ։</p><p>6. Օգտագործիր երկքայլ հաստատում։</p><p>7. Պարբերաբար պահուստավորիր կարևոր ֆայլերը։</p><h3>Ինչո՞ւ է սա կարևոր</h3><p>Այս կանոնները նվազեցնում են տվյալների կորստի, խաբեության և համակարգչի վնասման վտանգը։</p>`},
+password:{title:'Գաղտնաբառերի անվտանգություն',text:`<p>Գաղտնաբառը պաշտպանում է մեր անձնական հաշիվները և տվյալները։ Այն պետք է լինի դժվար կռահելի և տարբեր յուրաքանչյուր հաշվի համար։</p><h3>Ուժեղ գաղտնաբառի հատկանիշները</h3><p>• Պարունակում է առնվազն 12 նիշ։</p><p>• Ներառում է մեծատառեր և փոքրատառեր։</p><p>• Պարունակում է թվեր և հատուկ նշաններ։</p><p>• Չի պարունակում անուն կամ ծննդյան ամսաթիվ։</p><h3>Երկքայլ հաստատում</h3><p>Սա անվտանգության լրացուցիչ միջոց է, որի դեպքում գաղտնաբառից բացի անհրաժեշտ է նաև երկրորդ հաստատում։</p><h3>Հիշի՛ր</h3><p>Երբեք մի փոխանցիր քո գաղտնաբառը ուրիշներին։</p>`},
+whatAI:{title:'Ի՞նչ է արհեստական բանականությունը',text:`<p>Արհեստական բանականությունը (ԱԲ) տեխնոլոգիա է, որը հնարավորություն է տալիս համակարգիչներին կատարել այնպիսի առաջադրանքներ, որոնք սովորաբար պահանջում են մարդկային մտածողություն։</p><h3>Ի՞նչ կարող է անել ԱԲ-ն</h3><p>• Ճանաչել պատկերներ և ձայներ։</p><p>• Պատասխանել հարցերին։</p><p>• Թարգմանել տեքստեր։</p><p>• Ստեղծել նկարներ և երաժշտություն։</p><p>• Վերլուծել մեծ քանակությամբ տվյալներ։</p><h3>Ինչպե՞ս է աշխատում</h3><p>ԱԲ համակարգերը սովորում են մեծ քանակությամբ տվյալներից և դրանց հիման վրա փորձում են գտնել օրինաչափություններ ու ստեղծել պատասխաններ։</p><h3>Օրինակներ</h3><p>ChatGPT, Google Gemini, Microsoft Copilot և այլ գործիքներ։</p>`},
+chatgpt:{title:'ChatGPT',text:`<p>ChatGPT-ն OpenAI ընկերության ստեղծած արհեստական բանականության համակարգ է, որը կարող է հասկանալ և ստեղծել տեքստային պատասխաններ։</p><h3>Ի՞նչ կարող է անել ChatGPT-ն</h3><p>• Պատասխանել տարբեր հարցերի։</p><p>• Օգնել սովորել և հասկանալ դասերը։</p><p>• Թարգմանել տեքստեր։</p><p>• Գրել և բացատրել ծրագրավորման կոդեր։</p><p>• Օգնել ստեղծագործական աշխատանքներում։</p><h3>Առավելությունները</h3><p>Արագ աշխատանք, տարբեր թեմաներով օգնություն և տեղեկությունների պարզ բացատրություն։</p><h3>Թերությունները</h3><p>Երբեմն կարող է սխալ տեղեկություն տալ, ուստի կարևոր փաստերը պետք է ստուգել վստահելի աղբյուրներով։</p>`},
+tools:{title:'ԱԲ գործիքներ',text:`<p>Այսօր գոյություն ունեն բազմաթիվ արհեստական բանականության գործիքներ, որոնք օգնում են մարդկանց սովորել, ստեղծագործել և աշխատել։</p><h3>Հայտնի գործիքներ</h3><p><b>ChatGPT</b> – հարցերի պատասխաններ, տեքստեր և ուսումնական օգնություն։</p><p><b>Google Gemini</b> – հարցերի պատասխաններ և տարբեր առաջադրանքների կատարում։</p><p><b>Microsoft Copilot</b> – օգնում է տեղեկատվության որոնման և աշխատանքի ընթացքում։</p><p><b>Canva AI</b> – օգնում է ստեղծել դիզայններ և պատկերներ։</p><p><b>Adobe Firefly</b> – պատկերների և դիզայնի ստեղծման գործիք։</p><h3>Ինչո՞ւ են դրանք օգտակար</h3><p>Դրանք խնայում են ժամանակը, հեշտացնում աշխատանքը և բացում նոր ստեղծագործական հնարավորություններ։</p>`},
+uses:{title:'ԱԲ-ի կիրառությունները',text:`<p>Արհեստական բանականությունն արդեն օգտագործվում է կյանքի բազմաթիվ ոլորտներում։</p><h3>Կրթություն</h3><p>Օգնում է աշակերտներին հասկանալ բարդ թեմաները, սովորել լեզուներ և ստուգել գիտելիքները։</p><h3>Բժշկություն</h3><p>Օգնում է բժիշկներին ուսումնասիրել բժշկական պատկերները և վերլուծել տվյալները։</p><h3>Տրանսպորտ</h3><p>Օգտագործվում է երթևեկության կառավարման և ինքնավար մեքենաների զարգացման մեջ։</p><h3>Գիտություն</h3><p>Օգնում է գիտնականներին ուսումնասիրել տվյալներ և արագացնել հետազոտությունները։</p><h3>Արվեստ</h3><p>Օգնում է ստեղծել նկարներ, երաժշտություն և տեսանյութեր։</p>`},
+future:{title:'Արհեստական բանականության ապագան',text:`<p>Արհեստական բանականությունը արագ զարգացող տեխնոլոգիա է, որը կարող է մեծ փոփոխություններ բերել ապագայում։</p><h3>Ի՞նչ փոփոխություններ կարող են լինել</h3><p>• Ավելի խելացի համակարգեր։</p><p>• Բժշկության նոր հնարավորություններ։</p><p>• Կրթության անհատականացում։</p><p>• Աշխատանքի նոր մասնագիտություններ։</p><p>• Ավելի զարգացած ռոբոտներ։</p><h3>Կարո՞ղ է ԱԲ-ն փոխարինել մարդուն</h3><p>ԱԲ-ն կարող է ավտոմատացնել որոշ աշխատանքներ, սակայն մարդկային ստեղծագործականությունը, պատասխանատվությունը և քննադատական մտածողությունը շարունակում են կարևոր դեր ունենալ։</p><h3>Եզրակացություն</h3><p>Արհեստական բանականությունը կարող է դառնալ մեր ապագայի կարևորագույն տեխնոլոգիաներից մեկը։ Կարևոր է այն օգտագործել խելամիտ և պատասխանատու ձևով։</p>`},
+cpp:{title:'C++ ծրագրավորման լեզու',text:`<p>C++-ը ծրագրավորման լեզու է, որն օգտագործվում է արագ և արդյունավետ ծրագրեր ստեղծելու համար։ Այն ստեղծվել է Բյարնե Ստրաուստրուպի կողմից և զարգացել է C լեզվի հիման վրա։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Համակարգչային ծրագրերում։</p><p>• Խաղերի ստեղծման մեջ։</p><p>• Օպերացիոն համակարգերի որոշ մասերում։</p><p>• Ռոբոտաշինության և ներկառուցված համակարգերում։</p><h3>Առանձնահատկություն</h3><p>C++-ը թույլ է տալիս կառավարել համակարգչի ռեսուրսները և ստեղծել բարձր արագությամբ աշխատող ծրագրեր։</p>`},
+python:{title:'Python ծրագրավորման լեզու',text:`<p>Python-ը բարձր մակարդակի ծրագրավորման լեզու է, որը հայտնի է իր պարզ և ընթեռնելի շարահյուսությամբ։ Այն հարմար է ինչպես սկսնակների, այնպես էլ փորձառու ծրագրավորողների համար։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Արհեստական բանականության մեջ։</p><p>• Տվյալների վերլուծության համար։</p><p>• Կայքերի և հավելվածների ստեղծման մեջ։</p><p>• Գործընթացների ավտոմատացման համար։</p><h3>Առանձնահատկություն</h3><p>Python-ի կոդը սովորաբար հեշտ է կարդալ և հասկանալ, այդ պատճառով այն հաճախ խորհուրդ է տրվում ծրագրավորում սովորել սկսողներին։</p>`},
+javascript:{title:'JavaScript ծրագրավորման լեզու',text:`<p>JavaScript-ը ծրագրավորման լեզու է, որն առավել հաճախ օգտագործվում է կայքերին շարժունություն և ինտերակտիվություն հաղորդելու համար։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Կայքերի ինտերակտիվ տարրերում։</p><p>• Վեբ հավելվածներում։</p><p>• Սերվերային ծրագրերում։</p><p>• Բջջային և համակարգչային որոշ հավելվածներում։</p><h3>Առանձնահատկություն</h3><p>JavaScript-ը հիմնական լեզուներից է, որն օգտագործվում է ժամանակակից վեբ ծրագրավորման մեջ։</p>`},
+java:{title:'Java ծրագրավորման լեզու',text:`<p>Java-ն լայն կիրառություն ունեցող ծրագրավորման լեզու է։ Այն ստեղծվել է այնպես, որ նույն ծրագիրը հնարավոր լինի գործարկել տարբեր օպերացիոն համակարգերում՝ համապատասխան միջավայրի առկայությամբ։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Բիզնես ծրագրերում։</p><p>• Սերվերային համակարգերում։</p><p>• Android հավելվածների որոշ նախագծերում։</p><p>• Մեծ կազմակերպությունների ծրագրային համակարգերում։</p><h3>Առանձնահատկություն</h3><p>Java-ն օբյեկտակողմնորոշված լեզու է և ունի մեծ գրադարաններ ու ծրագրավորողների համայնք։</p>`},
+php:{title:'PHP ծրագրավորման լեզու',text:`<p>PHP-ն սերվերային ծրագրավորման լեզու է, որը հիմնականում օգտագործվում է դինամիկ կայքեր և վեբ հավելվածներ ստեղծելու համար։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Կայքերի սերվերային մասում։</p><p>• Բովանդակության կառավարման համակարգերում։</p><p>• Տվյալների բազաների հետ աշխատելիս։</p><h3>Առանձնահատկություն</h3><p>PHP-ն կարող է աշխատել HTML-ի հետ և օգնում է կայքերին տրամադրել դինամիկ բովանդակություն։</p>`},
+csharp:{title:'C# ծրագրավորման լեզու',text:`<p>C#-ը Microsoft-ի ստեղծած ժամանակակից ծրագրավորման լեզու է։ Այն հաճախ օգտագործվում է տարբեր տեսակի ծրագրեր և խաղեր ստեղծելու համար։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Windows ծրագրերում։</p><p>• Վեբ հավելվածներում։</p><p>• Խաղերի ստեղծման մեջ՝ Unity միջավայրով։</p><p>• Կորպորատիվ ծրագրային համակարգերում։</p><h3>Առանձնահատկություն</h3><p>C#-ը օբյեկտակողմնորոշված լեզու է և աշխատում է .NET հարթակի հետ։</p>`},
+ruby:{title:'Ruby ծրագրավորման լեզու',text:`<p>Ruby-ն բարձր մակարդակի ծրագրավորման լեզու է, որը ստեղծվել է պարզ և հաճելի գրելու համար։ Այն հայտնի է իր ընթեռնելի շարահյուսությամբ։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• Վեբ հավելվածների ստեղծման մեջ։</p><p>• Տվյալների մշակման որոշ առաջադրանքներում։</p><p>• Ծրագրային գործիքների և ավտոմատացման մեջ։</p><h3>Առանձնահատկություն</h3><p>Ruby-ն հաճախ օգտագործվում է Ruby on Rails շրջանակի միջոցով վեբ կայքեր և հավելվածներ ստեղծելու համար։</p>`},
+swift:{title:'Swift ծրագրավորման լեզու',text:`<p>Swift-ը Apple ընկերության ստեղծած ծրագրավորման լեզու է։ Այն նախատեսված է արագ և անվտանգ ծրագրեր ստեղծելու համար։</p><h3>Որտե՞ղ է կիրառվում</h3><p>• iPhone հավելվածներում։</p><p>• iPad հավելվածներում։</p><p>• Mac համակարգիչների ծրագրերում։</p><p>• Apple Watch և այլ Apple սարքերի հավելվածներում։</p><h3>Առանձնահատկություն</h3><p>Swift-ը ժամանակակից լեզու է, որի շարահյուսությունը համեմատաբար պարզ է, իսկ գործիքները՝ հարմար Apple հարթակների համար։</p>`}
+};
+
+// Տվյալների բազա՝ IndexedDB
+const DB_NAME='TECH_WORLD_DATABASE';const DB_VERSION=1;
+function openDB(){return new Promise((resolve,reject)=>{const request=indexedDB.open(DB_NAME,DB_VERSION);request.onupgradeneeded=function(){const db=request.result;if(!db.objectStoreNames.contains('problems'))db.createObjectStore('problems',{keyPath:'id'});if(!db.objectStoreNames.contains('pictures'))db.createObjectStore('pictures',{keyPath:'id'});};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
+async function getAllDB(store){const db=await openDB();return new Promise((resolve,reject)=>{const request=db.transaction(store).objectStore(store).getAll();request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
+async function saveDB(store,item){const db=await openDB();return new Promise((resolve,reject)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(item);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}
+async function deleteDB(store,id){const db=await openDB();return new Promise((resolve,reject)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}
+const initialProblems=[{id:1,title:'Խնդիր 1',text:'Երեք հաջորդական բնական թվերի գումարը 72 է։ Գտնել այդ թվերը։',ai:'72 : 3 = 24\n23, 24, 25',students:'Օրինակ՝ x + (x + 1) + (x + 2) = 72'},{id:2,title:'Խնդիր 2',text:'Երկու թվերի գումարը 48 է, իսկ դրանց տարբերությունը՝ 12։ Գտնել թվերը։',ai:'48 + 12 = 60\n60 : 2 = 30\nԵրկրորդ թիվը՝ 18։',students:'x + y = 48\nx - y = 12'},{id:3,title:'Խնդիր 3',text:'',ai:'',students:''},{id:4,title:'Խնդիր 4',text:'',ai:'',students:''}];
+
+const initialPictures=[
+{id:1,title:'Նկար 1',images:['images/picture1-1.jpg','images/picture1-2.jpg']},
+{id:2,title:'Նկար 2',images:['images/picture2-1.jpg','images/picture2-2.png']},
+{id:3,title:'Նկար 3',images:['images/picture3-1.jpg','images/picture3-2.png']},
+{id:4,title:'Նկար 4',images:['images/picture4-1.jpg','images/picture4-2.png']}
+];
+
+async function prepareData(){
+let problems=await getAllDB('problems');
+let pictures=await getAllDB('pictures');
+
+if(problems.length===0){
+for(const p of initialProblems)await saveDB('problems',p);
+}
+
+if(pictures.length===0){
+for(const p of initialPictures)await saveDB('pictures',p);
+}else{
+for(const initial of initialPictures){
+const existing=pictures.find(p=>p.id===initial.id);
+if(!existing)await saveDB('pictures',initial);
+else if(!existing.images||existing.images.length===0){
+existing.images=initial.images;
+await saveDB('pictures',existing);
+}
+}
+}
+}
+
+function showMenu(menu){
+['cyber','ai','languages'].forEach(id=>document.getElementById(id).style.display='none');
+document.getElementById(menu).style.display='block';
+document.getElementById('content').style.display='none';
+}
+
+function showContent(id){
+const title=document.getElementById('contentTitle');
+const text=document.getElementById('contentText');
+
+if(id==='partner'){
+title.innerText='🤝 ԱԲ-ն՝ գործընկեր, թե՞ մրցակից';
+text.innerHTML=`<h3>Նախագծային աշխատանք</h3><p>Այս բաժնում կարող ես ավելացնել քո նախագծային աշխատանքի խնդիրներն ու նկարները։</p><div class="project-tools"><button onclick="openProblems()">📝 Խնդիրներ</button><button onclick="openPictures()">🖼️ Նկարներ</button><a href="https://canva.link/gl12eu5fhudn8iq" target="_blank" rel="noopener">Բացել Canva նախագիծը</a></div><div id="projectArea"></div>`;
+}else{
+const item=information[id];
+if(!item)return;
+title.innerText=item.title;
+text.innerHTML=item.text;
+}
+
+document.getElementById('content').style.display='block';
+document.getElementById('content').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ԽՆԴԻՐՆԵՐ
+async function openProblems(){
+document.getElementById('projectArea').innerHTML=`<div class="project-panel"><h3>📝 Խնդիրներ</h3><p>Ընտրիր խնդիրը կամ ավելացրու նորը։</p><div class="project-list" id="problemList"></div><button class="add-btn" onclick="addProblem()">+ Ավելացնել խնդիր</button><div id="problemEditor"></div></div>`;
+await renderProblems();
+}
+
+async function renderProblems(){
+const list=document.getElementById('problemList');
+if(!list)return;
+const problems=await getAllDB('problems');
+list.innerHTML='';
+problems.sort((a,b)=>a.id-b.id).forEach(p=>{
+const b=document.createElement('button');
+b.textContent=p.title;
+b.onclick=()=>editProblem(p.id);
+list.appendChild(b);
+});
+}
+
+async function editProblem(id){
+const problems=await getAllDB('problems');
+const p=problems.find(x=>x.id===id);
+if(!p)return;
+document.getElementById('problemEditor').innerHTML=`<div class="project-editor"><h3>${p.title}</h3><label>Խնդրի պայմանը</label><textarea id="problemText"></textarea><label>Արհեստական բանականության լուծումը</label><textarea id="problemAI"></textarea><label>Աշակերտների լուծումը</label><textarea id="problemStudents"></textarea><div class="project-tools"><button onclick="saveProblem(${id})">💾 Պահպանել</button><button onclick="deleteProblem(${id})">🗑️ Ջնջել</button></div><p id="problemMessage" class="save-message"></p></div>`;
+document.getElementById('problemText').value=p.text;
+document.getElementById('problemAI').value=p.ai;
+document.getElementById('problemStudents').value=p.students;
+}
+
+async function addProblem(){
+const problems=await getAllDB('problems');
+const id=Math.max(0,...problems.map(p=>p.id))+1;
+const p={id,title:'Խնդիր '+id,text:'',ai:'',students:''};
+await saveDB('problems',p);
+await renderProblems();
+await editProblem(id);
+}
+
+async function saveProblem(id){
+const problems=await getAllDB('problems');
+const p=problems.find(x=>x.id===id);
+if(!p)return;
+p.text=document.getElementById('problemText').value;
+p.ai=document.getElementById('problemAI').value;
+p.students=document.getElementById('problemStudents').value;
+await saveDB('problems',p);
+document.getElementById('problemMessage').textContent='Պահպանված է։';
+await renderProblems();
+}
+
+async function deleteProblem(id){
+if(!confirm('Ջնջե՞լ այս խնդիրը։'))return;
+await deleteDB('problems',id);
+document.getElementById('problemEditor').innerHTML='';
+await renderProblems();
+}
+
+// ՆԿԱՐՆԵՐ
+async function openPictures(){
+document.getElementById('projectArea').innerHTML=`<div class="project-panel"><h3>🖼️ Նկարներ</h3><p>Ընտրիր նկարը կամ ավելացրու նոր նկարների բաժին։</p><div class="project-list" id="pictureList"></div><button class="add-btn" onclick="addPicture()">+ Ավելացնել նկարների բաժին</button><div id="pictureEditor"></div></div>`;
+await renderPictures();
+}
+
+async function renderPictures(){
+const list=document.getElementById('pictureList');
+if(!list)return;
+const pictures=await getAllDB('pictures');
+list.innerHTML='';
+pictures.sort((a,b)=>a.id-b.id).forEach(p=>{
+const b=document.createElement('button');
+b.textContent=p.title;
+b.onclick=()=>editPicture(p.id);
+list.appendChild(b);
+});
+}
+
+async function editPicture(id){
+const pictures=await getAllDB('pictures');
+const p=pictures.find(x=>x.id===id);
+if(!p)return;
+
+document.getElementById('pictureEditor').innerHTML=`<div class="project-editor">
+<h3>${p.title}</h3>
+<label>Բաժնի անունը</label>
+<input id="pictureTitle" type="text">
+<label>Ընտրել երկու նկար կամ ավելին</label>
+<input id="pictureFile" type="file" accept="image/*" multiple>
+<div id="picturePreview" class="image-preview"></div>
+<div class="project-tools">
+<button onclick="savePicture(${id})">💾 Պահպանել</button>
+<button onclick="deletePicture(${id})">🗑️ Ջնջել բաժինը</button>
+</div>
+<p id="pictureMessage" class="save-message"></p>
+</div>`;
+
+const titleInput=document.getElementById('pictureTitle');
+titleInput.value=p.title;
+titleInput.dataset.id=id;
+
+showPicturePreview(p.images);
+
+document.getElementById('pictureFile').addEventListener('change',async function(){
+const files=Array.from(this.files);
+
+for(const file of files){
+if(!file.type.startsWith('image/'))continue;
+
+const data=await new Promise((resolve,reject)=>{
+const reader=new FileReader();
+reader.onload=()=>resolve(reader.result);
+reader.onerror=()=>reject(reader.error);
+reader.readAsDataURL(file);
+});
+
+p.images.push(data);
+}
+
+await saveDB('pictures',p);
+showPicturePreview(p.images);
+document.getElementById('pictureMessage').textContent='Նկարները պահպանված են։';
+this.value='';
+});
+}
+
+function showPicturePreview(images){
+const box=document.getElementById('picturePreview');
+if(!box)return;
+
+box.innerHTML='';
+
+if(!images||images.length===0){
+box.innerHTML='<p>Նկար դեռ ավելացված չէ։</p>';
+return;
+}
+
+images.forEach((image,index)=>{
+const card=document.createElement('div');
+card.className='image-card';
+
+const img=document.createElement('img');
+img.src=image;
+img.className='project-image';
+img.alt='Նկար '+(index+1);
+
+const remove=document.createElement('button');
+remove.textContent='Ջնջել այս նկարը';
+remove.onclick=()=>removePictureImage(index);
+
+card.appendChild(img);
+card.appendChild(remove);
+box.appendChild(card);
+});
+}
+
+async function removePictureImage(index){
+const id=Number(document.getElementById('pictureTitle').dataset.id);
+const pictures=await getAllDB('pictures');
+const p=pictures.find(x=>x.id===id);
+
+if(!p)return;
+
+p.images.splice(index,1);
+await saveDB('pictures',p);
+showPicturePreview(p.images);
+}
+
+async function savePicture(id){
+const pictures=await getAllDB('pictures');
+const p=pictures.find(x=>x.id===id);
+if(!p)return;
+
+p.title=document.getElementById('pictureTitle').value.trim()||'Նկար';
+
+await saveDB('pictures',p);
+
+document.getElementById('pictureMessage').textContent='Պահպանված է։';
+await renderPictures();
+}
+
+async function addPicture(){
+const pictures=await getAllDB('pictures');
+const id=Math.max(0,...pictures.map(p=>p.id))+1;
+
+const p={
+id,
+title:'Նկար '+id,
+images:[]
+};
+
+await saveDB('pictures',p);
+await renderPictures();
+await editPicture(id);
+}
+
+async function deletePicture(id){
+if(!confirm('Ջնջե՞լ այս բաժինը։'))return;
+
+await deleteDB('pictures',id);
+
+document.getElementById('pictureEditor').innerHTML='';
+await renderPictures();
+}
+
+function backToMenu(){
+document.getElementById('content').style.display='none';
+window.scrollTo({top:300,behavior:'smooth'});
+}
+
+prepareData().catch(error=>console.error('Տվյալների բազայի սխալ:',error));
+</script>
+</body>
+</html>
+
