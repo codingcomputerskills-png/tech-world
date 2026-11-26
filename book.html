@@ -122,23 +122,30 @@ header p {
     overflow: hidden;
 }
 
+/* ՇԱՊԻԿԻ ՆԿԱՐԻ ՈՒՂՂՈՒՄ */
+
 .cover img {
     position: absolute;
+    inset: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    inset: 0;
+    object-fit: contain;
+    object-position: center;
+    z-index: 0;
+    background: #071525;
 }
 
 .cover::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(
         to bottom,
-        rgba(0,10,25,.75),
+        rgba(0,10,25,.65),
         transparent 45%,
-        rgba(0,10,25,.85)
+        rgba(0,10,25,.75)
     );
 }
 
@@ -182,15 +189,19 @@ header p {
     color: #9ceaff;
 }
 
-.photo {
-    width: 100%;
-    max-height: 260px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin: 10px 0 20px;
-}
+/* ՄՅՈՒՍ ՆԿԱՐՆԵՐԻ ՈՒՂՂՈՒՄ */
 
-.cards {
+.photo {
+    display: block;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 12px;
+    margin: 20px auto;
+}.cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -248,7 +259,9 @@ header p {
     color: #7890a4;
     font-size: 12px;
     font-weight: bold;
-}.qr-page {
+}
+
+.qr-page {
     min-height: 540px;
     display: flex;
     flex-direction: column;
@@ -368,6 +381,24 @@ footer {
         padding: 0;
     }
 
+    .cover img {
+        object-fit: contain;
+    }
+
+    .cover-content {
+        padding: 35px 18px;
+    }
+
+    .cover-footer {
+        padding: 20px 12px;
+    }
+
+    .photo {
+        width: 100%;
+        max-height: 280px;
+        object-fit: contain;
+    }
+
     .cards {
         grid-template-columns: 1fr;
     }
@@ -389,9 +420,7 @@ footer {
     }
 }
 </style>
-</head>
-
-<body>
+</head><body>
 
 <header>
     <h1>ԱԲ-ն՝ գործընկե՞ր, թե՞ մրցակից</h1>
@@ -540,7 +569,9 @@ alt="Արհեստական բանականությունը մեր առօրյայո
 բայց վերջնական ընտրությունը և պատասխանատվությունը մնում են մարդուն։
 </div>
 `
-},/* 4. ԱԲ-Ն՝ ՈՐՊԵՍ ԾՐԱԳՐԱՎՈՐՄԱՆ ՕԳՆԱԿԱՆ */
+},
+
+/* 4. ԱԲ-Ն՝ ՈՐՊԵՍ ԾՐԱԳՐԱՎՈՐՄԱՆ ՕԳՆԱԿԱՆ */
 {
 title: "ԱԲ-ն՝ որպես ծրագրավորման օգնական",
 html: `
@@ -594,9 +625,7 @@ alt="ԱԲ-ն՝ որպես ծրագրավորման օգնական">
 կիրառում է այն։
 </div>
 `
-},
-
-/* 5. ՄԱՐԴԸ ԵՎ ԱԲ-Ն */
+},/* 5. ՄԱՐԴԸ ԵՎ ԱԲ-Ն */
 {
 title: "Մարդը և ԱԲ-ն՝ խնդիրների լուծման ճանապարհին",
 html: `
@@ -691,7 +720,9 @@ alt="ԱԲ-ի ստեղծագործական հնարավորությունները
 գնահատումը մնում են մարդու դերը։
 </div>
 `
-},/* 7. ԱՌԱՎԵԼՈՒԹՅՈՒՆՆԵՐՆ ՈՒ ՎՏԱՆԳՆԵՐԸ */
+},
+
+/* 7. ԱՌԱՎԵԼՈՒԹՅՈՒՆՆԵՐՆ ՈՒ ՎՏԱՆԳՆԵՐԸ */
 {
 title: "ԱԲ-ի առավելություններն ու վտանգները",
 html: `
