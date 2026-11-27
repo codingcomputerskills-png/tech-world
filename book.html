@@ -10,168 +10,401 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-font-family:'Noto Sans Armenian',sans-serif;
-background:#071525;color:white;min-height:100vh;padding:25px 15px;
-background-image:radial-gradient(circle at top left,#123b5c,transparent 40%),radial-gradient(circle at bottom right,#361c4b,transparent 40%);
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-header{text-align:center;margin-bottom:30px}
-header p{color:#b7c9d9;font-size:13px}
-
-.book-container{max-width:850px;margin:auto;perspective:1500px}
-
-.book{
-background:#f7fbff;color:#20364a;min-height:540px;
-border-radius:12px;overflow:hidden;box-shadow:0 20px 65px rgba(0,0,0,.5);
-position:relative;transform-origin:left center;
+body {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    background: #071525;
+    color: white;
+    min-height: 100vh;
+    padding: 25px 15px;
+    background-image:
+        radial-gradient(circle at top left, #123b5c, transparent 40%),
+        radial-gradient(circle at bottom right, #361c4b, transparent 40%);
 }
 
-.book.flip-next{animation:flipNext .4s ease}
-.book.flip-prev{animation:flipPrev .4s ease}
-
-@keyframes flipNext{
-0%{transform:rotateY(0);opacity:1}
-50%{transform:rotateY(-7deg);opacity:.75}
-100%{transform:rotateY(0);opacity:1}
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-@keyframes flipPrev{
-0%{transform:rotateY(0);opacity:1}
-50%{transform:rotateY(7deg);opacity:.75}
-100%{transform:rotateY(0);opacity:1}
+header p {
+    color: #b7c9d9;
+    font-size: 13px;
 }
 
-.page{min-height:540px;padding:45px;position:relative;color:#243c52}
-
-.page h2{font-size:27px;color:#123b5c;margin-bottom:22px;line-height:1.5}
-.page p{font-size:14px;line-height:2;margin-bottom:15px;text-align:justify}
-
-.chapter{color:#1598c6;font-size:11px;font-weight:bold;letter-spacing:2px;margin-bottom:12px}
-
-.cover{
-min-height:540px;padding:0;position:relative;display:flex;
-flex-direction:column;justify-content:space-between;align-items:center;
-text-align:center;color:white;overflow:hidden;
+.book-container {
+    max-width: 850px;
+    margin: auto;
+    perspective: 1500px;
 }
 
-.cover img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0}
-
-.cover::after{
-content:"";position:absolute;inset:0;
-background:linear-gradient(to bottom,rgba(0,10,25,.75),transparent 45%,rgba(0,10,25,.85));
+.book {
+    background: #f7fbff;
+    color: #20364a;
+    min-height: 540px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 65px rgba(0,0,0,.5);
+    position: relative;
+    transform-origin: left center;
 }
 
-.cover-content{position:relative;z-index:2;padding:35px 25px;width:100%}
-.cover-label{color:#80e5ff;font-size:13px;font-weight:bold;letter-spacing:3px}
-
-.cover h2{
-color:white;font-size:clamp(27px,5vw,45px);line-height:1.5;
-margin:25px 0 10px;text-shadow:0 3px 15px black;
+.book.flip-next {
+    animation: flipNext .4s ease;
 }
 
-.cover .subtitle{font-size:14px;line-height:1.8}
-
-.cover-footer{position:relative;z-index:2;padding:20px;font-size:12px;line-height:2.2}
-.cover-footer strong{display:block;color:#9ceaff}
-
-.photo{width:100%;max-height:260px;object-fit:cover;border-radius:12px;margin:10px 0 20px}
-
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}
-
-.card{background:#eaf5fb;border:1px solid #d7eaf5;border-radius:12px;padding:16px}
-.card h3{color:#137ba5;font-size:14px;margin-bottom:8px}
-.card p{font-size:12px;margin:0;line-height:1.7}
-
-.highlight{
-padding:17px;background:#e4f6fc;border-left:4px solid #16a4d3;
-border-radius:8px;font-size:13px;line-height:1.8;margin-top:20px;
+.book.flip-prev {
+    animation: flipPrev .4s ease;
 }
 
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
-.tag{background:#dff4fc;color:#147da3;padding:7px 12px;border-radius:20px;font-size:11px}
-
-.page-number{position:absolute;bottom:18px;right:30px;color:#7890a4;font-size:12px;font-weight:bold}
-
-.qr-page{
-min-height:540px;display:flex;flex-direction:column;
-align-items:center;justify-content:center;text-align:center;
+@keyframes flipNext {
+    0% { transform: rotateY(0); opacity: 1; }
+    50% { transform: rotateY(-7deg); opacity: .75; }
+    100% { transform: rotateY(0); opacity: 1; }
 }
 
-.qr-page h2{font-size:25px}
-.qr-page p{text-align:center}
-
-.qr-form{width:100%;max-width:450px;display:flex;gap:8px;margin:15px 0}
-
-.qr-form input{
-flex:1;min-width:0;padding:13px;border:1px solid #b9d3e3;
-border-radius:8px;font-family:inherit;font-size:12px;
+@keyframes flipPrev {
+    0% { transform: rotateY(0); opacity: 1; }
+    50% { transform: rotateY(7deg); opacity: .75; }
+    100% { transform: rotateY(0); opacity: 1; }
 }
 
-.qr-form button{
-background:#124b72;color:white;border:none;padding:12px;
-border-radius:8px;cursor:pointer;font-family:inherit;
+.page {
+    min-height: 540px;
+    padding: 45px;
+    position: relative;
+    color: #243c52;
 }
 
-#qrcode{
-padding:10px;background:white;border-radius:10px;
-min-width:150px;min-height:150px;display:grid;place-items:center;
+.page h2 {
+    font-size: 27px;
+    color: #123b5c;
+    margin-bottom: 22px;
+    line-height: 1.5;
 }
 
-#qrcode img{max-width:100%}
-
-.controls{
-max-width:850px;margin:25px auto 0;display:flex;
-justify-content:space-between;align-items:center;gap:12px;
+.page p {
+    font-size: 14px;
+    line-height: 2;
+    margin-bottom: 15px;
+    text-align: justify;
 }
 
-.controls button{
-background:#124b72;color:white;border:1px solid #2778a7;
-border-radius:9px;padding:12px 22px;cursor:pointer;
-font-family:inherit;font-size:13px;transition:.2s;
+.chapter {
+    color: #1598c6;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
 }
 
-.controls button:hover:not(:disabled){background:#087fae}
-.controls button:disabled{opacity:.35;cursor:not-allowed}
+.cover {
+    min-height: 540px;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
 
-.counter{text-align:center;color:#b8d4e8;font-size:12px}
+.cover img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    inset: 0;
+}
 
-footer{text-align:center;margin-top:30px;color:#819bb1;font-size:11px;line-height:2}
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,10,25,.75),
+        transparent 45%,
+        rgba(0,10,25,.85)
+    );
+}
 
-@media(max-width:600px){
-body{padding:15px 10px}
-.page{padding:28px 22px 55px}
-.book,.page,.cover,.qr-page{min-height:620px}
-.cover{padding:0}
-.cards{grid-template-columns:1fr}
-.page h2{font-size:23px}
-.page p{font-size:13px}
-.qr-form{flex-direction:column}
-.controls button{padding:11px 13px}
+.cover-content {
+    position: relative;
+    z-index: 2;
+    padding: 35px 25px;
+    width: 100%;
+}
+
+.cover-label {
+    color: #80e5ff;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.cover h2 {
+    color: white;
+    font-size: clamp(27px, 5vw, 45px);
+    line-height: 1.5;
+    margin: 25px 0 10px;
+    text-shadow: 0 3px 15px black;
+}
+
+.cover .subtitle {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.cover-footer {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    font-size: 12px;
+    line-height: 2.2;
+}
+
+.cover-footer strong {
+    display: block;
+    color: #9ceaff;
+}
+
+.photo {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 10px 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.card {
+    background: #eaf5fb;
+    border: 1px solid #d7eaf5;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.card h3 {
+    color: #137ba5;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.7;
+}
+
+.highlight {
+    padding: 17px;
+    background: #e4f6fc;
+    border-left: 4px solid #16a4d3;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.tag {
+    background: #dff4fc;
+    color: #147da3;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 18px;
+    right: 30px;
+    color: #7890a4;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.qr-page {
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.qr-page h2 {
+    font-size: 25px;
+}
+
+.qr-page p {
+    text-align: center;
+}
+
+.qr-form {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.qr-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid #b9d3e3;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.qr-form button {
+    background: #124b72;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#qrcode {
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    min-width: 150px;
+    min-height: 150px;
+    display: grid;
+    place-items: center;
+}
+
+#qrcode img {
+    max-width: 100%;
+}
+
+.controls {
+    max-width: 850px;
+    margin: 25px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.controls button {
+    background: #124b72;
+    color: white;
+    border: 1px solid #2778a7;
+    border-radius: 9px;
+    padding: 12px 22px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.controls button:hover:not(:disabled) {
+    background: #087fae;
+}
+
+.controls button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+.counter {
+    text-align: center;
+    color: #b8d4e8;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #819bb1;
+    font-size: 11px;
+    line-height: 2;
+}
+
+@media(max-width: 600px) {
+    body {
+        padding: 15px 10px;
+    }
+
+    .page {
+        padding: 28px 22px 55px;
+    }
+
+    .book, .page, .cover, .qr-page {
+        min-height: 620px;
+    }
+
+    .cover {
+        padding: 0;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .page h2 {
+        font-size: 23px;
+    }
+
+    .page p {
+        font-size: 13px;
+    }
+
+    .qr-form {
+        flex-direction: column;
+    }
+
+    .controls button {
+        padding: 11px 13px;
+    }
 }
 </style>
 </head>
 <body>
 
 <header>
-<p>Թվային գիրք • Մարդու և արհեստական բանականության աշխարհում</p>
+    <p>Թվային գիրք • Մարդու և արհեստական բանականության աշխարհում</p>
 </header>
 
 <div class="book-container">
-<div class="book" id="book"></div>
+    <div class="book" id="book"></div>
 </div>
 
 <div class="controls">
-<button id="prev">← Նախորդ էջ</button>
-<div class="counter" id="counter">Շապիկ</div>
-<button id="next">Հաջորդ էջ →</button>
+    <button id="prev">← Նախորդ էջ</button>
+    <div class="counter" id="counter">Շապիկ</div>
+    <button id="next">Հաջորդ էջ →</button>
 </div>
 
 <footer>
-Ախթալայի թիվ 2 միջնակարգ դպրոց<br>
-9-րդ դասարանի աշակերտներ • 2026
+    Ախթալայի թիվ 2 միջնակարգ դպրոց<br>
+    9-րդ դասարանի աշակերտներ • 2026
 </footer>
 
 <script>
@@ -180,34 +413,37 @@ const pages = [
 
 /* 1. ՇԱՊԻԿ */
 {
-type:"cover",
-html:`
+type: "cover",
+html: `
 <img src="assets/cover-ai-human.jpeg" alt="Մարդ և արհեստական բանականություն">
 
 <div class="cover-content">
-<div>
-<div class="cover-label">ԹՎԱՅԻՆ ԳԻՐՔ</div>
-<h2>ԱԲ-ն՝ գործընկե՞ր, թե՞ մրցակից</h2>
-<div class="subtitle">
-Մարդու և արհեստական բանականության
-համագործակցության աշխարհում
-</div>
-</div>
+    <div>
+        <div class="cover-label">ԹՎԱՅԻՆ ԳԻՐՔ</div>
+
+        <h2>ԱԲ-ն՝ գործընկե՞ր, թե՞ մրցակից</h2>
+
+        <div class="subtitle">
+            Մարդու և արհեստական բանականության
+            համագործակցության աշխարհում
+        </div>
+    </div>
 </div>
 
 <div class="cover-footer">
-Գրքի հեղինակներ՝ 9-րդ դասարանի աշակերտներ
-<strong>Ախթալայի թիվ 2 միջնակարգ դպրոց</strong>
-2026
+    Գրքի հեղինակներ՝ 9-րդ դասարանի աշակերտներ
+    <strong>Ախթալայի թիվ 2 միջնակարգ դպրոց</strong>
+    2026
 </div>
 `
 },
 
 /* 2. ԱՐՀԵՍՏԱԿԱՆ ԲԱՆԱԿԱՆՈՒԹՅԱՆ ԱՇԽԱՐՀՈՒՄ */
 {
-title:"Արհեստական բանականության աշխարհում",
-html:`
+title: "Արհեստական բանականության աշխարհում",
+html: `
 <div class="chapter">ԳԼՈՒԽ 01</div>
+
 <h2>Արհեստական բանականության աշխարհում</h2>
 
 <p>
@@ -247,9 +483,10 @@ html:`
 
 /* 3. ԱԲ-Ն ՄԵՐ ԱՌՕՐՅԱՅՈՒՄ */
 {
-title:"ԱԲ-ն մեր առօրյայում",
-html:`
+title: "ԱԲ-ն մեր առօրյայում",
+html: `
 <div class="chapter">ԳԼՈՒԽ 02</div>
+
 <h2>ԱԲ-ն մեր առօրյայում</h2>
 
 <p>
@@ -297,9 +534,10 @@ html:`
 
 /* 4. ԱԲ-Ն՝ ՈՐՊԵՍ ԾՐԱԳՐԱՎՈՐՄԱՆ ՕԳՆԱԿԱՆ */
 {
-title:"ԱԲ-ն՝ որպես ծրագրավորման օգնական",
-html:`
+title: "ԱԲ-ն՝ որպես ծրագրավորման օգնական",
+html: `
 <div class="chapter">ԳԼՈՒԽ 03</div>
+
 <h2>ԱԲ-ն՝ որպես ծրագրավորման օգնական</h2>
 
 <p>
@@ -346,19 +584,20 @@ html:`
 `
 },/* 5. ՄԱՐԴԸ ԵՎ ԱԲ-Ն */
 {
-title:"Մարդը և ԱԲ-ն՝ խնդիրների լուծման ճանապարհին",
-html:`
+title: "Մարդը և ԱԲ-ն՝ խնդիրների լուծման ճանապարհին",
+html: `
 <div class="chapter">ԳԼՈՒԽ 04</div>
+
 <h2>Մարդը և ԱԲ-ն՝ խնդիրների լուծման ճանապարհին</h2>
 
 <img class="photo"
 src="assets/human-ai-collaboration.jpeg"
 alt="Մարդու և ԱԲ-ի համագործակցություն">
 
-<img
+<img class="photo"
 src="assets/cover-ai-human.jpeg"
 alt="Գրքի շապիկ"
-style="width:220px;max-height:260px;object-fit:contain;display:block;margin:15px auto;border-radius:12px;">
+style="width:220px; max-height:260px; object-fit:contain; display:block; margin:15px auto;">
 
 <p>
 Մարդն ու արհեստական բանականությունը կարող են նույն
@@ -391,9 +630,10 @@ style="width:220px;max-height:260px;object-fit:contain;display:block;margin:15px
 
 /* 6. ԱԲ-Ի ՍՏԵՂԾԱԳՈՐԾԱԿԱՆ ՀՆԱՐԱՎՈՐՈՒԹՅՈՒՆՆԵՐԸ */
 {
-title:"ԱԲ-ի ստեղծագործական հնարավորությունները",
-html:`
+title: "ԱԲ-ի ստեղծագործական հնարավորությունները",
+html: `
 <div class="chapter">ԳԼՈՒԽ 05</div>
+
 <h2>ԱԲ-ի ստեղծագործական հնարավորությունները</h2>
 
 <p>
@@ -442,9 +682,10 @@ html:`
 
 /* 7. ԱՌԱՎԵԼՈՒԹՅՈՒՆՆԵՐՆ ՈՒ ՎՏԱՆԳՆԵՐԸ */
 {
-title:"ԱԲ-ի առավելություններն ու վտանգները",
-html:`
+title: "ԱԲ-ի առավելություններն ու վտանգները",
+html: `
 <div class="chapter">ԳԼՈՒԽ 06</div>
+
 <h2>ԱԲ-ի առավելություններն ու վտանգները</h2>
 
 <p>
@@ -497,8 +738,8 @@ html:`
 
 /* 8. QR */
 {
-type:"qr",
-html:`
+type: "qr",
+html: `
 <div class="qr-page">
 
 <div class="chapter">ՄԵՐ ՆԱԽԱԳԻԾԸ՝ ՄԵԿ ՀԱՐԹԱԿՈՒՄ</div>
@@ -536,116 +777,120 @@ QR կոդը կհայտնվի այստեղ
 
 ];
 
-let current=0;
+let current = 0;
 
-const book=document.getElementById("book");
-const counter=document.getElementById("counter");
-const prev=document.getElementById("prev");
-const next=document.getElementById("next");
+const book = document.getElementById("book");
+const counter = document.getElementById("counter");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
 
-function renderPage(direction=""){
+function renderPage(direction = "") {
 
-book.classList.remove("flip-next","flip-prev");
-void book.offsetWidth;
+    book.classList.remove("flip-next", "flip-prev");
+    void book.offsetWidth;
 
-if(direction){
-book.classList.add(direction==="next"?"flip-next":"flip-prev");
+    if (direction) {
+        book.classList.add(
+            direction === "next" ? "flip-next" : "flip-prev"
+        );
+    }
+
+    const page = pages[current];
+
+    if (page.type === "cover") {
+
+        book.innerHTML = `
+        <div class="cover">
+            ${page.html}
+        </div>
+        `;
+
+        counter.textContent = "Շապիկ";
+
+    } else if (page.type === "qr") {
+
+        book.innerHTML = `
+        <div class="page qr-page">
+            ${page.html}
+        </div>
+        `;
+
+        counter.textContent = "Վերջին էջ";
+
+        setupQR();
+
+    } else {
+
+        book.innerHTML = `
+        <div class="page">
+            ${page.html}
+            <div class="page-number">${current}</div>
+        </div>
+        `;
+
+        counter.textContent =
+            `Էջ ${current} / ${pages.length - 2}`;
+    }
+
+    prev.disabled = current === 0;
+    next.disabled = current === pages.length - 1;
 }
 
-const page=pages[current];
+function setupQR() {
 
-if(page.type==="cover"){
+    const form = document.getElementById("qrForm");
 
-book.innerHTML=`
-<div class="cover">
-${page.html}
-</div>
-`;
+    form.addEventListener("submit", function(e) {
 
-counter.textContent="Շապիկ";
+        e.preventDefault();
 
-}else if(page.type==="qr"){
+        const url = document.getElementById("siteUrl").value.trim();
+        const qr = document.getElementById("qrcode");
 
-book.innerHTML=`
-<div class="page qr-page">
-${page.html}
-</div>
-`;
+        qr.innerHTML = "";
 
-counter.textContent="Վերջին էջ";
-setupQR();
+        if (typeof QRCode === "undefined") {
+            qr.textContent = "QR գրադարանը չի բեռնվել։ Ստուգիր ինտերնետ կապը։";
+            return;
+        }
 
-}else{
+        new QRCode(qr, {
+            text: url,
+            width: 150,
+            height: 150,
+            colorDark: "#102f4b",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
 
-book.innerHTML=`
-<div class="page">
-${page.html}
-<div class="page-number">${current}</div>
-</div>
-`;
-
-counter.textContent=`Էջ ${current} / ${pages.length-2}`;
-
+    });
 }
 
-prev.disabled=current===0;
-next.disabled=current===pages.length-1;
+function changePage(step) {
+
+    const newPage = current + step;
+
+    if (newPage < 0 || newPage >= pages.length) {
+        return;
+    }
+
+    current = newPage;
+
+    renderPage(step > 0 ? "next" : "prev");
 }
 
-function setupQR(){
+next.addEventListener("click", () => changePage(1));
+prev.addEventListener("click", () => changePage(-1));
 
-const form=document.getElementById("qrForm");
+document.addEventListener("keydown", function(e) {
 
-form.addEventListener("submit",function(e){
+    if (e.key === "ArrowRight") {
+        changePage(1);
+    }
 
-e.preventDefault();
-
-const url=document.getElementById("siteUrl").value.trim();
-const qr=document.getElementById("qrcode");
-
-qr.innerHTML="";
-
-if(typeof QRCode==="undefined"){
-qr.textContent="QR գրադարանը չի բեռնվել։ Ստուգիր ինտերնետ կապը։";
-return;
-}
-
-new QRCode(qr,{
-text:url,
-width:150,
-height:150,
-colorDark:"#102f4b",
-colorLight:"#ffffff",
-correctLevel:QRCode.CorrectLevel.H
-});
-
-});
-}
-
-function changePage(step){
-
-const newPage=current+step;
-
-if(newPage<0||newPage>=pages.length){
-return;
-}
-
-current=newPage;
-renderPage(step>0?"next":"prev");
-}
-
-next.addEventListener("click",()=>changePage(1));
-prev.addEventListener("click",()=>changePage(-1));
-
-document.addEventListener("keydown",function(e){
-
-if(e.key==="ArrowRight"){
-changePage(1);
-}
-
-if(e.key==="ArrowLeft"){
-changePage(-1);
-}
+    if (e.key === "ArrowLeft") {
+        changePage(-1);
+    }
 
 });
 
