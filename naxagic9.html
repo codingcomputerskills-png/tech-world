@@ -8,8 +8,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Arial,sans-serif;background:#071426;color:white;min-height:100vh}
 header{background:#0c1d33;padding:25px;text-align:center;border-bottom:2px solid #168bce}
-header h1{color:#38bdf8;letter-spacing:3px}
-header p{margin-top:10px;color:#b5c8da}
+header h1{color:#38bdf8;letter-spacing:3px}header p{margin-top:10px;color:#b5c8da}
 .container{max-width:1100px;margin:45px auto;padding:20px;text-align:center}
 .intro{margin-top:15px;color:#b5c8da}
 .main-buttons{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin:40px 0}
@@ -108,6 +107,7 @@ footer{text-align:center;padding:25px;color:#8da9c4;margin-top:60px;border-top:1
 </div>
 
 <footer>© 2026 TECH WORLD | Բոլոր իրավունքները պաշտպանված են</footer>
+
 <script>
 const information={
 virus:{title:'Համակարգչային վիրուսներ',text:`<p>Համակարգչային վիրուսները վնասակար ծրագրեր են, որոնք կարող են ներթափանցել համակարգիչ և խանգարել դրա բնականոն աշխատանքին։</p><h3>Վիրուսների տեսակները</h3><p><b>1. Trojan (Տրոյական ծրագիր)</b> – ծրագիր, որը ներկայանում է որպես օգտակար, բայց կարող է վնասել համակարգիչը։</p><p><b>2. Worm (Որդ)</b> – վնասակար ծրագիր, որը կարող է ինքնուրույն տարածվել համակարգչային ցանցերով։</p><p><b>3. Ransomware</b> – ծրագիր, որը սահմանափակում է ֆայլերի հասանելիությունը և պահանջում գումար։</p><h3>Ինչպե՞ս պաշտպանվել</h3><p>Օգտագործել հակավիրուսային ծրագիր, չբացել անհայտ հղումներ և ներբեռնումներ, պարբերաբար թարմացնել համակարգիչը։</p><h3>Հետաքրքիր փաստ</h3><p>Առաջին համակարգչային վիրուսներից մեկը՝ Creeper-ը, ստեղծվել է 1971 թվականին։</p>`},
@@ -201,10 +201,10 @@ const initialProblems=[
 ];
 
 const initialPictures=[
-{id:1,title:'Նկար 1',images:['images/picture1-1.jpg','images/picture1-2.jpg']},
-{id:2,title:'Նկար 2',images:['images/picture2-1.jpg','images/picture2-2.png']},
-{id:3,title:'Նկար 3',images:['images/picture3-1.jpg','images/picture3-2.png']},
-{id:4,title:'Նկար 4',images:['images/picture4-1.jpg','images/picture4-2.png']}
+{id:1,title:'Նկար 1',images:['./nkar1.jpg','./nkar2.jpg']},
+{id:2,title:'Նկար 2',images:['./nkar3.jpg','./nkar4.jpg']},
+{id:3,title:'Նկար 3',images:['./nkar5.jpg','./nkar6.jpg']},
+{id:4,title:'Նկար 4',images:['./nkar7.jpg','./nkar8.jpg']}
 ];
 
 async function prepareData(){
@@ -216,18 +216,19 @@ for(const p of initialProblems)
 await saveDB('problems',p);
 }
 
-if(pictures.length===0){
-for(const p of initialPictures)
-await saveDB('pictures',p);
-}else{
 for(const initial of initialPictures){
 const existing=pictures.find(p=>p.id===initial.id);
-if(!existing)
+
+if(!existing){
 await saveDB('pictures',initial);
-else if(!existing.images||existing.images.length===0){
-existing.images=initial.images;
+}else{
+const oldImages=(existing.images||[]).filter(src=>
+!/^images\/picture\d+-\d+\.(jpg|jpeg|png|webp)$/i.test(src)&&
+!initial.images.includes(src)
+);
+
+existing.images=[...initial.images,...oldImages];
 await saveDB('pictures',existing);
-}
 }
 }
 }
@@ -254,8 +255,7 @@ text.innerHTML=`
 <div class="project-tools">
 <button onclick="openProblems()">📝 Խնդիրներ</button>
 <button onclick="openPictures()">🖼️ Նկարներ</button>
-<a href="https://codingcomputerskills-png.github.io/tech-world/book.html" target="_blank" rel="noopener">📖 Բացել թվային գիրքը</a>
-<a href="https://canva.link/gl12eu5fhudn8iq" target="_blank" rel="noopener">Բացել Canva նախագիծը</a>
+<a href="book.html" target="_blank">📖 Բացել թվային գիրքը</a>
 </div>
 
 <div id="projectArea"></div>
