@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="hy">
 <head>
 <meta charset="UTF-8">
@@ -149,6 +149,8 @@ swift:{title:'Swift ծրագրավորման լեզու',text:`<p>Swift-ը Apple
 const DB_NAME='TECH_WORLD_DATABASE';
 const DB_VERSION=1;
 
+const SITE_BASE='https://codingcomputerskills-png.github.io/tech-world/images/';
+
 function openDB(){
 return new Promise((resolve,reject)=>{
 const request=indexedDB.open(DB_NAME,DB_VERSION);
@@ -201,19 +203,20 @@ const initialProblems=[
 ];
 
 const initialPictures=[
-{id:1,title:'Նկար 1',images:['./nkar1.jpg','./nkar2.jpg']},
-{id:2,title:'Նկար 2',images:['./nkar3.jpg','./nkar4.jpg']},
-{id:3,title:'Նկար 3',images:['./nkar5.jpg','./nkar6.jpg']},
-{id:4,title:'Նկար 4',images:['./nkar7.jpg','./nkar8.jpg']}
+{id:1,title:'Նկար 1',images:[SITE_BASE+'nkar1.jpg',SITE_BASE+'nkar2.jpg']},
+{id:2,title:'Նկար 2',images:[SITE_BASE+'nkar3.jpg',SITE_BASE+'nkar4.jpg']},
+{id:3,title:'Նկար 3',images:[SITE_BASE+'nkar5.jpg',SITE_BASE+'nkar6.jpg']},
+{id:4,title:'Նկար 4',images:[SITE_BASE+'nkar7.jpg',SITE_BASE+'nkar8.jpg']}
 ];
 
 async function prepareData(){
-let problems=await getAllDB('problems');
-let pictures=await getAllDB('pictures');
+const problems=await getAllDB('problems');
+const pictures=await getAllDB('pictures');
 
 if(problems.length===0){
-for(const p of initialProblems)
+for(const p of initialProblems){
 await saveDB('problems',p);
+}
 }
 
 for(const initial of initialPictures){
@@ -222,10 +225,14 @@ const existing=pictures.find(p=>p.id===initial.id);
 if(!existing){
 await saveDB('pictures',initial);
 }else{
-const oldImages=(existing.images||[]).filter(src=>
-!/^images\/picture\d+-\d+\.(jpg|jpeg|png|webp)$/i.test(src)&&
-!initial.images.includes(src)
-);
+const oldImages=(existing.images||[]).filter(src=>{
+if(typeof src!=='string')return false;
+if(src.startsWith('data:image/'))return true;
+if(/^https?:\/\//i.test(src)){
+return !/^https:\/\/codingcomputerskills-png\.github\.io\/tech-world\/(images\/)?nkar[1-8]\.jpg$/i.test(src);
+}
+return false;
+});
 
 existing.images=[...initial.images,...oldImages];
 await saveDB('pictures',existing);
@@ -255,7 +262,7 @@ text.innerHTML=`
 <div class="project-tools">
 <button onclick="openProblems()">📝 Խնդիրներ</button>
 <button onclick="openPictures()">🖼️ Նկարներ</button>
-<a href="book.html" target="_blank">📖 Բացել թվային գիրքը</a>
+<a href="book.html" target="_blank" rel="noopener">📖 Բացել թվային գիրքը</a>
 </div>
 
 <div id="projectArea"></div>
@@ -318,9 +325,9 @@ document.getElementById('problemEditor').innerHTML=`
 <p id="problemMessage" class="save-message"></p>
 </div>`;
 
-document.getElementById('problemText').value=p.text;
-document.getElementById('problemAI').value=p.ai;
-document.getElementById('problemStudents').value=p.students;
+document.getElementById('problemText').value=p.text||'';
+document.getElementById('problemAI').value=p.ai||'';
+document.getElementById('problemStudents').value=p.students||'';
 }
 
 async function addProblem(){
@@ -351,9 +358,7 @@ if(!confirm('Ջնջե՞լ այս խնդիրը։'))return;
 await deleteDB('problems',id);
 document.getElementById('problemEditor').innerHTML='';
 await renderProblems();
-}
-
-// ՆԿԱՐՆԵՐ
+}// ՆԿԱՐՆԵՐ
 async function openPictures(){
 document.getElementById('projectArea').innerHTML=`
 <div class="project-panel">
@@ -371,6 +376,7 @@ const list=document.getElementById('pictureList');
 if(!list)return;
 const pictures=await getAllDB('pictures');
 list.innerHTML='';
+
 pictures.sort((a,b)=>a.id-b.id).forEach(p=>{
 const b=document.createElement('button');
 b.textContent=p.title;
@@ -383,6 +389,8 @@ async function editPicture(id){
 const pictures=await getAllDB('pictures');
 const p=pictures.find(x=>x.id===id);
 if(!p)return;
+
+if(!Array.isArray(p.images))p.images=[];
 
 document.getElementById('pictureEditor').innerHTML=`
 <div class="project-editor">
@@ -447,6 +455,16 @@ const img=document.createElement('img');
 img.src=image;
 img.className='project-image';
 img.alt='Նկար '+(index+1);
+img.style.cursor='pointer';
+
+img.onclick=()=>{
+window.open(image,'_blank');
+};
+
+img.onerror=()=>{
+img.alt='Նկարը չի գտնվել։ Ստուգիր GitHub-ում ֆայլի անունը։';
+img.style.minHeight='100px';
+};
 
 const remove=document.createElement('button');
 remove.textContent='Ջնջել այս նկարը';
